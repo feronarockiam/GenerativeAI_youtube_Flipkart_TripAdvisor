@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Trip Scrapper</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f2f2f2;
+        }
+
+        h1 {
+            text-align: center;
+            margin-top: 50px;
+        }
+
+        form {
+            width: 400px;
+            margin: 0 auto;
+            background-color: #fff;
+            padding: 20px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+
+        label {
+            display: block;
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+
+        input[type="text"] {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+
+        input[type="button"],
+        input[type="submit"] {
+            background-color: #4CAF50;
+            color: #fff;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        input[type="button"]:hover,
+        input[type="submit"]:hover {
+            background-color: #45a049;
+        }
+
+        #promptContainer {
+            margin-top: 10px;
+        }
+    </style>
+</head>
+
+<body>
+    <h1>Chatbot API</h1>
+    <form method="POST" action="/">
+        <label for="url">Enter a hotel URL from TripAdvisor:</label>
+        <input type="text" id="url" name="url" required><br><br>
+        <label for="prompt">Enter a prompt:</label>
+        <input type="text" id="prompt" name="prompt" required><br><br>
+        <input type="button" value="Add Prompt" onclick="addPrompt()"><br><br>
+        <div id="promptContainer"></div><br>
+        <input type="submit" value="Submit">
+    </form>
+
+    <script>
+        function addPrompt() {
+            var container = document.getElementById("promptContainer");
+            var input = document.createElement("input");
+            input.type = "text";
+            input.name = "prompt";
+            container.appendChild(input);
+        }
+    </script>
+</body>
+
+</html>

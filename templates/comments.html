@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>YouTube Comments Generator - Response</title>
+</head>
+<style>
+    body {
+        font-family: Arial, sans-serif;
+        margin: 0;
+        padding: 20px;
+        background-color: #f7f7f7;
+    }
+
+    h1 {
+        margin-bottom: 30px;
+        color: #333333;
+        text-align: center;
+        font-size: 28px;
+    }
+
+    pre {
+        background-color: #ffffff;
+        padding: 20px;
+        margin-bottom: 20px;
+        white-space: pre-wrap;
+        border: 1px solid #cccccc;
+        border-radius: 3px;
+        font-size: 14px;
+    }
+</style>
+<body>
+    <h1>Scrappy.Ai - Response</h1>
+
+    <h2>YouTube Comments:</h2>
+    <pre>{{ youtube_review }}</pre>
+
+    <h2>Generate Response:</h2>
+    <form id="generate-form">
+        <label for="prompt">Enter a prompt:</label>
+        <input type="text" id="prompt" name="prompt" required>
+        <input type="hidden" id="youtube_review" name="youtube_review" value="{{ youtube_review }}">
+        <button type="submit">Generate</button>
+    </form>
+
+    <h2>Generated Response:</h2>
+    <pre id="generated-response"></pre>
+
+    <script>
+        document.getElementById("generate-form").addEventListener("submit", function (event) {
+            event.preventDefault();
+            var prompt = document.getElementById("prompt").value;
+            var youtube_review = document.getElementById("youtube_review").value;
+            var data = JSON.stringify({ prompt: prompt, youtube_review: youtube_review });
+
+            fetch("/generate", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                },
+                body: data,
+            })
+                .then(function (response) {
+                    return response.json();
+                })
+                .then(function (data) {
+                    document.getElementById("generated-response").textContent = data;
+                });
+        });
+    </script>
+</body>
+</html>
